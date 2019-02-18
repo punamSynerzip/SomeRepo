@@ -8,12 +8,15 @@ pipeline {
         }
 	stage('Test') {
 	    steps {
-		sh 'mvn test'
+		sh 'echo "Fail!"; exit 1'
 	    }
 	    post {
 	    	always {
-		    junit 'target/surefire-reports/*.xml'
+		    echo 'This will always run'
 	    	}
+		success {
+            	    echo 'This will run only if successful'
+        	}
 	    }
 	}
     }
